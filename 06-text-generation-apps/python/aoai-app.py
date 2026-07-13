@@ -15,7 +15,10 @@ client = OpenAI(
 deployment=os.environ['AZURE_OPENAI_DEPLOYMENT']
 
 # add your completion code
-prompt = "Complete the following: Once upon a time there was a"
+
+no_recipes = input("How many recipes? : ")
+ingredients = input("List of Ingredients(eg. tofu, bell peppers, onions): ")
+prompt = f"Show me {no_recipes} recipes for a dish with the following ingredients: {ingredients}. Per recipe, list all the ingredients used" 
 # make a request using the Responses API
 response = client.responses.create(model=deployment, input=prompt, store=False)
 
