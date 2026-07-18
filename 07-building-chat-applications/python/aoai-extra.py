@@ -41,9 +41,12 @@ while True:
     system_instructions = "You are an strict Formula 1 assistant. You must only answer the user's question " \
     "using the data and information provided in the 'Verified Local Data section below. If the answer cannot be found " \
     "entirely using the data given, answer simply with 'Answer cannot be found using local data.'"
+
+    if local_context:
+        system_instructions += local_context
     response = client.responses.create(
         model=model,
-        input = [{"role":"system", "content":"You are a helpful assistant."},
+        input = [{"role":"system", "content":system_instructions},
                {"role":"user","content":prompt},],
         store=False,)        
     print(f"AI: {response.output_text}\n")
